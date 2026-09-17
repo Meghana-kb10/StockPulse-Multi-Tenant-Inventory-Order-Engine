@@ -108,7 +108,7 @@ export function DashboardShell() {
 
       {/* 24/7 Logistics Support & HQ Modal */}
       <ContactSupportModal
-        open={supportOpen}
+        isOpen={supportOpen}
         onClose={() => setSupportOpen(false)}
       />
     </div>
