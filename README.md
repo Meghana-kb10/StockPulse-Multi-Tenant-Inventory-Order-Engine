@@ -68,7 +68,7 @@ npm run dev
 
 ---
 
-## 📄 Resume Snapshot (Google X-Y-Z Format)
+## 📄 Resume Snapshot 
 
 **StockPulse: Multi-Tenant B2B Inventory & Order Engine**
 
