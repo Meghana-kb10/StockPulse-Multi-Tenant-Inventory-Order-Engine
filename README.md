@@ -15,11 +15,56 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**StockPulse** is a distributed, multi-tenant B2B inventory management platform and high-concurrency Point-of-Sale (POS) order engine. Engineered to solve the mission-critical challenges of inventory contention, POS deadlocks, and cross-tenant data leakage, StockPulse combines pessimistic row-level database locking, strict row-level security isolation, and an accessible dark-walnut executive dashboard.
+## 📖 What is StockPulse?
 
----
+StockPulse is a complete, full-stack application built to solve a very specific business problem: **managing inventory and processing orders for multiple companies at the same time without making mistakes.** 
 
-# StockPulse: Multi-Tenant B2B Inventory & Order Engine
+Imagine two cashiers trying to buy the exact last item in stock at the exact same millisecond. Most basic systems will crash or accidentally sell the item twice (overselling). StockPulse uses advanced database locking techniques to ensure this never happens. It also features a "Multi-Tenant" design, meaning completely different companies (like *Bharat Logistics* and *Deccan Supply Chain*) can securely use the exact same software without ever seeing each other's data.
+
+## 🧩 Project Components
+
+This project is built using modern, industry-standard technologies split into three main parts:
+
+* **Frontend (The User Interface):** Built with **Next.js**, **React**, and **Tailwind CSS**. It provides a beautiful, dark-themed dashboard where managers can view real-time stock levels, check analytics, and process orders. It also features interactive 3D graphics and is thoroughly tested with **Playwright**.
+* **Backend (The Engine):** Built with **Node.js** and **Express.js**. This is the brain of the operation. It securely handles all incoming requests, enforces role-based access control (making sure a Cashier can't do an Admin's job), and coordinates the high-speed checkout logic.
+* **Database (The Vault):** Built with **PostgreSQL** and managed using the **Prisma ORM**. This stores all the products, users, and orders. We use advanced PostgreSQL features (like Row-Level Locks) to guarantee data safety.
+
+## 🚀 Getting Started (How to run it on your system)
+
+### Prerequisites
+* **Node.js** (v20+)
+* **PostgreSQL** (Running on port `5432`)
+* **Git**
+
+*(Alternatively, you can just use **Docker Desktop** to run everything with one command!)*
+
+### Option 1: Docker (Easiest)
+```bash
+# 1. Clone the repository
+git clone https://github.com/Meghana-kb10/StockPulse-Multi-Tenant-Inventory-Order-Engine.git
+cd StockPulse-Multi-Tenant-Inventory-Order-Engine
+
+# 2. Build and launch all containerized services
+docker compose up --build
+```
+Once it finishes, open `http://localhost:3000` in your browser!
+
+### Option 2: Run it Manually (Node.js & Postgres)
+```bash
+# 1. Clone the repo and install dependencies
+git clone https://github.com/Meghana-kb10/StockPulse-Multi-Tenant-Inventory-Order-Engine.git
+cd StockPulse-Multi-Tenant-Inventory-Order-Engine
+npm install
+
+# 2. Setup the database and add demo data
+npm run db:push
+npm run db:seed
+
+# 3. Start the application
+npm run dev
+```
+* **Frontend Dashboard:** [http://localhost:3000](http://localhost:3000)
+* **Backend API:** [http://localhost:3001](http://localhost:3001)
 
 ---
 
@@ -123,55 +168,7 @@ The StockPulse interface is engineered with a dark-walnut and warm-amber aesthet
 
 ---
 
-## 💻 Local Development & Quickstart
 
-### Prerequisites
-
-* Docker Desktop (v20+) **OR** Node.js (v20+) and PostgreSQL 16 on port `5432`
-* Git
-
-### Option 1: Single-Command Docker Setup (Recommended)
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/shatwiks/StockPulse-Multi-Tenant-Inventory-Order-Engine.git
-cd StockPulse-Multi-Tenant-Inventory-Order-Engine
-
-# 2. Build and launch all containerized services
-docker compose up --build
-
-```
-
-**Service Endpoints:**
-
-* **Frontend Web Application:** [http://localhost:3000](http://localhost:3000)
-* **Backend REST API Engine:** [http://localhost:3001](http://localhost:3001)
-* **PostgreSQL Database:** `localhost:5432` (`stockpulse_inventory`)
-
-*Note: The container healthcheck automatically runs database migrations and seeds initial tenant organizations upon startup.*
-
-To trigger an explicit re-seed inside the active container:
-
-```bash
-npm run docker:seed
-# Alternative: bash scripts/docker-seed.sh
-
-```
-
-### Option 2: Native Host Setup
-
-```bash
-# 1. Install root and workspace dependencies
-npm install
-
-# 2. Run Prisma migrations and seed initial tenant datasets
-npm run db:migrate
-npm run db:seed
-
-# 3. Launch Express backend (:3001) and Next.js frontend (:3000) concurrently
-npm run dev
-
-```
 
 ---
 

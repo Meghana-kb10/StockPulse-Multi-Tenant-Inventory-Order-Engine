@@ -32,6 +32,7 @@
     "docker:seed": "docker compose exec backend npx tsx prisma/seed.ts"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "concurrently": "^10.0.5"
   }
 }
