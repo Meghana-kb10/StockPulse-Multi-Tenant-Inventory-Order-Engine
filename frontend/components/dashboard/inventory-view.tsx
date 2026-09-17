@@ -286,8 +286,8 @@ export function InventoryView({ tenant }: InventoryViewProps) {
           1. Header Area within Main Content Block (Walnut Wood-Grain Hero)
           ===================================================================== */}
       <section className="wood-surface relative overflow-hidden rounded-2xl border border-border/70 p-5 shadow-lg sm:p-6">
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-col gap-2">
+        <div className="flex flex-wrap flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-2 min-w-[300px]">
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/20 px-2.5 py-0.5 text-xs font-semibold text-primary">
                 <Boxes className="size-3.5" aria-hidden="true" />
@@ -315,7 +315,7 @@ export function InventoryView({ tenant }: InventoryViewProps) {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 shrink-0 flex-wrap">
             {/* Live Count KPI cards */}
             <dl className="grid grid-cols-3 gap-2.5 w-full sm:w-auto">
               <HeroStat
@@ -640,7 +640,7 @@ export function InventoryView({ tenant }: InventoryViewProps) {
                       <div className="flex items-center gap-3">
                         <div className="relative size-10 shrink-0 overflow-hidden rounded-lg border border-border bg-muted">
                           <Image
-                            src={getCategoryImage(product.category, product.categoryName)}
+                            src={getCategoryImage(product.category, product.categoryName, product.name)}
                             alt={`${product.name} product photo`}
                             width={40}
                             height={40}
@@ -837,7 +837,7 @@ function HeroStat({
         )}
       >
         {icon}
-        <span>{label}</span>
+        <span className="whitespace-nowrap">{label}</span>
       </div>
       <p className="mt-0.5 text-lg font-bold tabular-nums text-white">{value}</p>
     </div>

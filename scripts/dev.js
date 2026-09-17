@@ -45,6 +45,11 @@ function ensureEnvFiles() {
     fs.writeFileSync(frontendEnv, defaultFrontendEnv, 'utf8');
     console.log('\x1b[32m[StockPulse]\x1b[0m Created default frontend/.env');
   }
+
+  try {
+    require('dotenv').config({ path: backendEnv });
+    require('dotenv').config({ path: rootEnv });
+  } catch {}
 }
 
 // 2. Remove any stale Next.js lockfiles left by previous crashes
@@ -335,11 +340,11 @@ async function main() {
   console.log('\x1b[32m[frontend]\x1b[0m Starting Next.js Web App on http://localhost:3000...');
   const frontendProcess = spawn(
     nodeBin,
-    [nextBin, 'dev'],
+    [nextBin, 'dev', '-p', '3000'],
     {
       cwd: frontendDir,
       stdio: 'inherit',
-      env: { ...process.env, FORCE_COLOR: '1' },
+      env: { ...process.env, PORT: '3000', FORCE_COLOR: '1' },
     }
   );
 

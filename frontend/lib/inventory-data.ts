@@ -51,12 +51,16 @@ export const categoryImage: Record<string, string> = Object.fromEntries([
  * by pattern-matching against known image keywords.
  */
 const imageKeywords: [string, string][] = [
+  ['printer', '/products/electrical.png'],
+  ['hub', '/products/electrical.png'],
   ['electronic', '/products/electrical.png'],
   ['pos', '/products/electrical.png'],
+  ['apron', '/products/safety.png'],
+  ['vest', '/products/safety.png'],
+  ['boot', '/products/safety.png'],
+  ['shoe', '/products/safety.png'],
   ['safety', '/products/safety.png'],
   ['protective', '/products/safety.png'],
-  ['logistics', '/products/power-tools.png'],
-  ['warehouse', '/products/power-tools.png'],
   ['pantry', '/products/fluids.png'],
   ['coffee', '/products/fluids.png'],
   ['essential', '/products/fluids.png'],
@@ -68,14 +72,16 @@ const imageKeywords: [string, string][] = [
   ['tool', '/products/power-tools.png'],
   ['fluid', '/products/fluids.png'],
   ['electrical', '/products/electrical.png'],
+  ['logistics', '/products/power-tools.png'],
+  ['warehouse', '/products/power-tools.png'],
 ]
 
-export function getCategoryImage(categoryKey: string, categoryName?: string): string {
+export function getCategoryImage(categoryKey: string, categoryName?: string, productName?: string): string {
   // 1. Direct lookup
   if (categoryImage[categoryKey]) return categoryImage[categoryKey]
 
-  // 2. Fuzzy keyword match against slug + name
-  const haystack = `${categoryKey} ${categoryName || ''}`.toLowerCase()
+  // 2. Fuzzy keyword match against slug + name + product name
+  const haystack = `${categoryKey} ${categoryName || ''} ${productName || ''}`.toLowerCase()
   for (const [keyword, image] of imageKeywords) {
     if (haystack.includes(keyword)) return image
   }
